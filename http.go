@@ -6,7 +6,6 @@ import (
     "log"
     "net/http"
     "strconv"
-    "abcdkksdkasda"
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
@@ -24,8 +23,10 @@ func to_roman(n int)  string {
 	return "V"
     } else if n == 6 {
 	return "VI"
+    } else if n == 7 {
+	return "VII"
     } else if n == 10 {
-	reiturn "X"
+	return "X"
     }
     return "I"
 }
