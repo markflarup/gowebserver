@@ -4,7 +4,7 @@ import (
     "fmt"
     "net/http"
     "net/http/httptest"
-    . "testing"
+    .  "testing"
 )
 
 func TestRomanOne(t *T) {
@@ -44,6 +44,34 @@ func TestRomanOne(t *T) {
 }
 
 
+func fiveShouldReturnV(t *T) {
+	n := romanGenerator(1)
+	r, _ := http.NewRequest("GET", "/roman/5", nil)
+	w := httptest.NewRecorder()
+	n.ServeHTTP(w, r)
+	if w.Code != 200 {
+		t.Fatalf("wrong code returned: %d", w.Code) 
+	}
+	body := w.Body.String()
+	if body != fmt.Sprintf("Here's your numer: V\n") {
+		t.Fatalf("wrong body returned: %s", body)
+	}
+}
+
+func fourShouldReturnIV(t *T) {
+	n := romanGenerator(1)
+	r, _ := http.NewRequest("GET", "/roman/4", nil)
+	w := httptest.NewRecorder()
+	n.ServeHTTP(w, r)
+	if w.Code != 200 {
+		t.Fatalf("wrong code returned: %d", w.Code) 
+	}
+	body := w.Body.String()
+	if body != fmt.Sprintf("Here's your numer: IV\n") {
+		t.Fatalf("wrong body returned: %s", body)
+	}
+}
+
 func TestRomanTwo(t *T) {
     n := romanGenerator(1)
     r, _ := http.NewRequest("GET", "/roman/2", nil)
@@ -56,5 +84,4 @@ func TestRomanTwo(t *T) {
     if body != fmt.Sprintf("Here's your number: II\n") {
         t.Fatalf("wrong body returned: %s", body)
     }
-
 }
